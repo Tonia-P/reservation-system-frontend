@@ -17,9 +17,9 @@ function App() {
     <div className="App">
       <TopNavbar/>
         <Outlet />
-        {/* <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
-        </button> */}
+        </button>
         
     </div>
   )

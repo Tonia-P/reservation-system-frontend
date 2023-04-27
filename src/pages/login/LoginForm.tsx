@@ -11,7 +11,7 @@ const LoginForm = () => {
   const [formState, setFormState] = useState<FormState>({
     email: "",
     password: "",
-    rememberMe: false,
+    rememberMe: false
   });
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -30,14 +30,22 @@ const LoginForm = () => {
     }));
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(formState);
+
+    var urlEnd = 'http://localhost:3000/user/auth/login'
+    await fetch(urlEnd, {
+      method: "POST",
+      body: JSON.stringify(formState)
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
   };
 
   return (
     <div className="w-full flex h-5/6 justify-center">
-      <div className="bg-white w-2/6 rounded-lg flex flex-col place-self-center drop-shadow-xl p-8">
+      <div className=" w-2/6 rounded-lg flex flex-col place-self-center drop-shadow-xl p-8">
         <p className="text-xl leading-7 font-bold py-4">Log in to your account</p>
         <form onSubmit={handleSubmit} className="flex flex-col" >
 

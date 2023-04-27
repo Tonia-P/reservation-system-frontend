@@ -6,17 +6,18 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import LoginForm from './pages/login/LoginForm';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>
-    // children: [
-    //   {
-    //     path: "login",
-    //     element: <LoginForm />,
-    //   },
-    // ],
+    element: <App/>,
+    children: [
+      {
+        path: "login",
+        element: <LoginForm />,
+      },
+    ],
   }
 ]);
 

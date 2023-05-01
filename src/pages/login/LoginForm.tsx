@@ -4,15 +4,15 @@ import Button from "../../components/interaction/Button";
 interface FormState {
   email: string;
   password: string;
-  rememberMe: boolean;
 }
 
 const LoginForm = () => {
   const [formState, setFormState] = useState<FormState>({
     email: "",
-    password: "",
-    rememberMe: false
+    password: ""
   });
+
+  const [adminToggle, setAdminToggle] = useState<number>(0)
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -30,28 +30,40 @@ const LoginForm = () => {
     }));
   };
 
+  const handleAdminButtonPress = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAdminToggle((prevState) => (prevState === 0 ? 1 : 0))
+  }
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(formState);
 
-    var urlEnd = 'http://localhost:3000/user/auth/login'
-    await fetch(urlEnd, {
-      method: "POST",
-      body: JSON.stringify(formState)
-    })
-    .then(res => res.json())
-    .then(data => console.log(data))
+    const xhttp = new XMLHttpRequest();
+    const obj = {};
+    xhttp.onreadystatechange = function () {
+      if (xhttp.readyState === 4) {
+        if (xhttp.status === 200) {
+          // location.href = '/user/home';
+        } else if (xhttp.status !== 200) {
+        }
+        console.log(xhttp.responseText);
+      }
+    };
+    console.log("sending : ", formState);
+    xhttp.open("POST", "http://localhost:3000/user/auth/login");
+    xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+    xhttp.send(JSON.stringify(formState));
   };
 
   return (
     <div className="w-full flex h-5/6 justify-center">
-      <div className=" w-2/6 rounded-lg flex flex-col place-self-center drop-shadow-xl p-8">
-        <p className="text-xl leading-7 font-bold py-4">Log in to your account</p>
-        <form onSubmit={handleSubmit} className="flex flex-col" >
-
-
+      <div  className=" lg:w-2/6 md:w-1/2 w-full rounded-lg flex flex-col place-self-center drop-shadow-xl p-8">
+        <p className="text-xl leading-7 font-bold py-4">
+          Log in to your account
+        </p>
+        <form onSubmit={handleSubmit} className="flex flex-col">
           <label className="flex flex-col w-full py-4">
-            <span className="label-text">E-mail</span>
+            <span className="label-text">{adminToggle ? "Username" : "Email"}</span>
             <input
               type="email"
               name="email"
@@ -61,8 +73,8 @@ const LoginForm = () => {
             />
           </label>
 
-          <label className="flex flex-col w-full py-4">
-          <span className="label-text">Password</span>
+          <label className="flex flex-col w-full py-4 pb-8">
+            <span className="label-text">Password</span>
             <input
               type="password"
               name="password"
@@ -71,27 +83,14 @@ const LoginForm = () => {
               onChange={handleInputChange}
             />
           </label>
-          
-          <label className="label cursor-pointer w-1/3 pb-8 pt-4">
-          <span className="label-text">Remember me</span> 
-            <input
-              type="checkbox"
-              name="rememberMe"
-              className="checkbox checkbox-primary"
-              checked={formState.rememberMe}
-              onChange={handleCheckboxChange}
-            />
-          </label>
 
           <Button styles="btn btn-primary">
-
-          <input type="submit" value="Submit" />
+            <input type="submit" value="Submit" />
           </Button>
-          <br/>
-          <Button styles="btn btn-ghost">
-            Login as administrator
-          </Button>
-        </form>
+          <br />
+          </form>
+          <Button styles="btn btn-ghost" onClick={handleAdminButtonPress}>Login as {adminToggle?  "administrator" : "user" }</Button>
+        
       </div>
     </div>
   );

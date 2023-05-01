@@ -1,13 +1,14 @@
-import { HTMLProps, ReactNode } from "react";
+import { HTMLProps, ReactNode, MouseEventHandler } from "react";
 
 type Props = {
     children: ReactNode;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
     styles?: HTMLProps<HTMLElement>["className"];
 }
 
-const Button = ({children, styles}: Props) => {
+const Button = ({children, styles, onClick}: Props) => {
     return(
-        <button className={`btn normal-case ${styles}`} >
+        <button className={`btn normal-case ${styles}`} onClick={onClick}>
             {children}
         </button>
     )

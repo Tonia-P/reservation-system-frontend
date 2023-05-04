@@ -1,4 +1,5 @@
 import Button from "../interaction/Button"
+import { SearchBar } from "./SearchBar"
 
 export const SideMenu = () => {
     return(
@@ -6,7 +7,7 @@ export const SideMenu = () => {
             
             <div className="flex flex-col">
 
-            <p> Search here </p>
+            <SearchBar/>
 
             <Button styles="btn-ghost">Rooms</Button>
             <Button styles="btn-ghost">Events</Button>

@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import LoginForm from './pages/login/LoginForm';
 import RegisterForm from './pages/register/RegisterPage';
+import { Dashboard } from './pages/dashboard/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <RegisterForm />,
+      },
+      {
+        path: "dashboard",
+        element: <Dashboard />,
       },
     ],
   }

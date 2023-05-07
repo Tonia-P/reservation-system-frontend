@@ -11,16 +11,11 @@ import TopNavbar from './components/navigation/TopNavbar'
 import LoginForm from './pages/login/LoginForm'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className="App">
       <TopNavbar/>
-        <Outlet />
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        
+      <Outlet />
     </div>
   )
 }

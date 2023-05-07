@@ -12,7 +12,10 @@ const TopNavbar = ({}) => {
           <Link to="/login">
             <Button styles="btn-ghost">Login</Button>
           </Link>
-          <Button styles="btn-secondary">Join</Button>
+
+          <Link to="register">
+            <Button styles="btn-secondary">Join</Button>
+          </Link>
         </div>
       </div>
     </div>

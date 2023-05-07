@@ -9,17 +9,18 @@ import {
 import Button from './components/interaction/Button'
 import TopNavbar from './components/navigation/TopNavbar'
 import LoginForm from './pages/login/LoginForm'
+import { AuthContextProvider } from './contexts/AuthContext';
 
 function App() {
+  const [user, setUser] = useState()
   const [count, setCount] = useState(0)
 
   return (
     <div className="App">
-      <TopNavbar/>
+      <AuthContextProvider>
+        <TopNavbar/>
         <Outlet />
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      </AuthContextProvider>
         
     </div>
   )

@@ -22,14 +22,6 @@ const LoginForm = () => {
     }));
   };
 
-  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = event.target;
-    setFormState((prevState) => ({
-      ...prevState,
-      [name]: checked,
-    }));
-  };
-
   const handleAdminButtonPress = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAdminToggle((prevState) => (prevState === 0 ? 1 : 0))
   }
@@ -43,6 +35,7 @@ const LoginForm = () => {
     xhttp.onreadystatechange = function () {
       if (xhttp.readyState === 4) {
         if (xhttp.status === 200) {
+          
           // location.href = '/user/home';
         } else if (xhttp.status !== 200) {
         }

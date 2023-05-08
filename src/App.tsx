@@ -1,21 +1,24 @@
 import './App.css'
 import {
-  Outlet,
+  Outlet
 } from "react-router-dom";
 import TopNavbar from './components/navigation/TopNavbar'
-import LoginForm from './pages/login/LoginForm'
-import { AuthContextProvider } from './contexts/AuthContext';
-import { useState } from 'react';
+import { AuthContextProvider, useAuth } from './contexts/AuthContext';
+import { ChangeEvent } from 'react';
 
 function App() {
-  const [user, setUser] = useState()
-  const [count, setCount] = useState(0)
+
+  const {
+    authUser, isLogged
+  } = useAuth();
 
   return (
     <div className="App">
       <AuthContextProvider>
+
         <TopNavbar/>
         <Outlet />
+        {authUser?.fname}
       </AuthContextProvider>
         
     </div>

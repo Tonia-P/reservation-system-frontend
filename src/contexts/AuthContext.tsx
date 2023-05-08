@@ -1,7 +1,24 @@
-import { createContext, FunctionComponent, ReactNode, useContext, useState  } from 'react';
+import { createContext, useMemo, FunctionComponent, ReactNode, useContext, useState  } from 'react';
 
+interface UserData {
+    email: string;
+    fname: string;
+    lname: string;
+    password: string;
+    id: string;
+    company: string;
+}
+interface AuthContextData {
+    authUser: UserData | null;
+    setAuthUser: (authUser: UserData | null) => void;
+    isLogged: boolean;
+    setIsLogged: (isLogged: boolean) => void;
+}
 
-const AuthContext = createContext({});
+const AuthContext = createContext<AuthContextData>({authUser: null,
+    isLogged: false,
+    setAuthUser: () => {},
+    setIsLogged: () => {},});
 
 type Props = {
     children: ReactNode;
@@ -11,25 +28,18 @@ const useAuth = () => {
     return useContext(AuthContext)
 }
 
-const { Provider } = AuthContext;
-
 const AuthContextProvider: FunctionComponent<Props> = ({children}) => {
 
-    const [authUser, setAuthUser] = useState(null);
-    const [isLogged, setIsLogged] = useState(false);
+    const [authUser, setAuthUser] = useState<UserData | null>(null);
+    const [isLogged, setIsLogged] = useState<boolean>(false);
 
-    const values = {
-        authUser,
-        setAuthUser,
-        isLogged,
-        setIsLogged
-    }
-       
+
+
     return (
-        <Provider value= {values}>
+        <AuthContext.Provider value= {{authUser, setAuthUser, isLogged, setIsLogged}}>
             {children}
-        </Provider>
+        </AuthContext.Provider>
     );
 };
 
-export { AuthContext, AuthContextProvider };
+export { AuthContext, AuthContextProvider, useAuth };

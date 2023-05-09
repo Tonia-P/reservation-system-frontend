@@ -4,6 +4,7 @@ import App from './App'
 import './index.css'
 import {
   createBrowserRouter,
+  redirect,
   RouterProvider,
 } from "react-router-dom";
 import LoginForm from './pages/login/LoginForm';
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "login",
-        element: <LoginForm />,
+        element: <LoginForm />
       },
       {
         path: "register",
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <Dashboard />,
-      },
+      }
     ],
   }
 ]);

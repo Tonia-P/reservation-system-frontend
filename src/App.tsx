@@ -17,8 +17,11 @@ function App() {
       <AuthContextProvider>
 
         <TopNavbar/>
+        <p>
+          {authUser?.fname}
+          </p>
+          {isLogged}
         <Outlet />
-        {authUser?.fname}
       </AuthContextProvider>
         
     </div>

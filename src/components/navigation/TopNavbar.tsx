@@ -1,12 +1,15 @@
 import Button from "../interaction/Button";
 import { Link } from "react-router-dom";
 import { TopNavbarTab } from "./TopNavbarTab";
+import { useAuth } from "../../contexts/AuthContext";
 
 type Props = {
   color?: "white" | "natural";
 };
 
 const TopNavbar = ({ color }: Props) => {
+
+  const {authUser} = useAuth();
   return (
     <div
       className={`h-14 primary-500 text-${color} justify-center w-full flex`}
@@ -39,7 +42,7 @@ const TopNavbar = ({ color }: Props) => {
         </div>
         <div>
           <Link to="/login">
-            <Button styles="btn-ghost mr-3">Login</Button>
+            <Button styles="btn-ghost mr-3">Login {authUser?.fname}</Button>
           </Link>
 
           <Link to="register">

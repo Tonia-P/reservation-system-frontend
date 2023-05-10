@@ -1,12 +1,13 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Button from "../../components/interaction/Button";
 import { useAuth } from "../../contexts/AuthContext";
-import { redirect } from "react-router-dom";
+import { redirect, Form } from "react-router-dom";
 
 interface FormState {
   email: string;
   password: string;
 }
+
 
 const LoginForm = () => {
   const [formState, setFormState] = useState<FormState>({
@@ -40,13 +41,7 @@ const LoginForm = () => {
     }));
   };
 
-  useEffect(() => {
-    if (isLogged) {
-      console.log("Kappa")
 
-      redirect("/dashboard")
-    }
-  }, []);
 
   const handleAdminButtonPress = (
     event: React.MouseEvent<HTMLButtonElement>

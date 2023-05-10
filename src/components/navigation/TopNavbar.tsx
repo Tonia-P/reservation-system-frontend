@@ -9,7 +9,7 @@ type Props = {
 
 const TopNavbar = ({ color }: Props) => {
 
-  const {authUser} = useAuth();
+  const {authUser, isLogged} = useAuth();
   return (
     <div
       className={`h-14 primary-500 text-${color} justify-center w-full flex`}
@@ -20,7 +20,7 @@ const TopNavbar = ({ color }: Props) => {
         <div className="flex w-1/2 justify-between">
           <TopNavbarTab label="About Us" labelcolor={color}>
             <li>
-              <a>Teammate 1</a>
+              <a>Teammate 1 {isLogged? "true" : "false"}</a>
             </li>
             <li>
               <a>Teammate 2</a>

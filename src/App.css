@@ -3,5 +3,4 @@
 @tailwind utilities;
 
 #root {
-  min-width: 100vw;
 }

@@ -7,7 +7,7 @@ export const Dashboard = () => {
 
             <SideMenu />
             
-            <div className="lg:pl-[19.5rem]">
+            <div className="lg:pl-[20rem] lg:pr-3">
 
             <Outlet />
             </div>

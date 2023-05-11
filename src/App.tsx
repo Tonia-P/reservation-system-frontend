@@ -25,40 +25,31 @@ function App() {
   return (
     <>
       <div className="App">
-          <Router>
-            <TopNavbar />
-            <p>
-              <br />
-              <br />
-              <br />
-              <br />
-              {authUser?.fname}
-            </p>
-            {isLogged}
+        <Router>
+          <TopNavbar />
 
-            <Routes>
-              <Route path="/" element={<>Kappa</>} />
-              <Route
-                path="/login"
-                element={
-                  isLogged ? (
-                    <Navigate to="/dashboard" replace />
-                  ) : (
-                    <LoginForm />
-                  )
-                }
-              />
-              <Route path="/register" element={
-                  isLogged ? (
-                    <Navigate to="/dashboard" replace />
-                  ) : (
-                    <RegisterForm />
-                  )
-                } />
-              <Route path="/dashboard" element={<Dashboard />} />
-            </Routes>
-        
-          </Router>
+          <Routes>
+            <Route path="/" element={<>TODO</>} />
+            <Route
+              path="/login"
+              element={
+                isLogged ? <Navigate to="/dashboard" replace /> : <LoginForm />
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                isLogged ? (
+                  <Navigate to="/dashboard" replace />
+                ) : (
+                  <RegisterForm />
+                )
+              }
+            />
+
+            {isLogged && <Route path="/dashboard" element={<Dashboard />} />}
+          </Routes>
+        </Router>
       </div>
     </>
   );

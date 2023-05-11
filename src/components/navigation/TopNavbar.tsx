@@ -9,7 +9,12 @@ type Props = {
 
 const TopNavbar = ({ color }: Props) => {
 
-  const {authUser, isLogged} = useAuth();
+  const {authUser, isLogged, setAuthUser, setIsLogged} = useAuth();
+
+  const logOut = () => {
+    setAuthUser(null);
+    setIsLogged(false);
+  }
   return (
     <div
       className={`h-14 primary-500 text-${color} justify-center w-full flex`}
@@ -40,6 +45,15 @@ const TopNavbar = ({ color }: Props) => {
 
           <TopNavbarTab label="GitHub" labelcolor={color} />
         </div>
+
+        {isLogged ?
+        <div>
+          <Link to="/" onClick={logOut}>
+            <Button styles="btn-ghost mr-3">Logout</Button>
+          </Link>
+        </div>
+        
+        :
         <div>
           <Link to="/login">
             <Button styles="btn-ghost mr-3">Login {authUser?.fname}</Button>
@@ -49,6 +63,7 @@ const TopNavbar = ({ color }: Props) => {
             <Button styles="btn-secondary px-10">Join</Button>
           </Link>
         </div>
+      }
       </div>
     </div>
   );

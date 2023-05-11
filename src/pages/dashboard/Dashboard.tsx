@@ -1,16 +1,14 @@
-import { Outlet } from "react-router-dom"
-import { SideMenu } from "../../components/navigation/SideMenu"
+import { Outlet } from "react-router-dom";
+import { SideMenu } from "../../components/navigation/SideMenu";
 
 export const Dashboard = () => {
-    return(
-        <div>
+  return (
+    <div>
+      <SideMenu />
 
-            <SideMenu />
-            
-            <div className="lg:pl-[20rem] lg:pr-3">
-
-            <Outlet />
-            </div>
-        </div>
-    )
-}
+      <div className="lg:pl-[20rem] lg:pr-3">
+        <Outlet />
+      </div>
+    </div>
+  );
+};

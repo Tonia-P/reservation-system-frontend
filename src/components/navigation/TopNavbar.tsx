@@ -56,7 +56,7 @@ const TopNavbar = ({ color }: Props) => {
         :
         <div>
           <Link to="/login">
-            <Button styles="btn-ghost mr-3">Login {authUser?.fname}</Button>
+            <Button styles="btn-ghost mr-3">Login</Button>
           </Link>
 
           <Link to="register">

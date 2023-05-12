@@ -18,6 +18,7 @@ import LoginForm from "./pages/login/LoginForm";
 import RegisterForm from "./pages/register/RegisterPage";
 import { Dashboard } from "./pages/dashboard/Dashboard";
 import Home from "./pages/home/Home";
+import { RoomsPage } from "./pages/dashboard/rooms/RoomsPage";
 
 function App() {
   const { authUser, isLogged } = useAuth();
@@ -47,7 +48,9 @@ function App() {
               }
             />
 
-            {isLogged && <Route path="/dashboard" element={<Dashboard />} />}
+            {isLogged && <Route path="/dashboard" element={<Dashboard />} >
+              <Route path="rooms" element={<RoomsPage />} />
+              </Route>}
           </Routes>
         </Router>
       </div>

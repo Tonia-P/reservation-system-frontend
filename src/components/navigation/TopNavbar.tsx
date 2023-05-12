@@ -17,7 +17,7 @@ const TopNavbar = ({ color }: Props) => {
   }
   return (
     <div
-      className={`h-14 primary-500 text-${color} justify-center w-full flex`}
+      className={`h-14 primary-500 text-${color} sticky top-0 z-20 bg-primary-content justify-center w-full flex`}
     >
       <div className="flex justify-between items-center w-3/4">
         <label className="normal-case">Logo</label>
@@ -56,7 +56,7 @@ const TopNavbar = ({ color }: Props) => {
         :
         <div>
           <Link to="/login">
-            <Button styles="btn-ghost mr-3">Login {authUser?.fname}</Button>
+            <Button styles="btn-ghost mr-3">Login</Button>
           </Link>
 
           <Link to="register">

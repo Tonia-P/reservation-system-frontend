@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { RoomCard } from "../../../components/cards/RoomCard";
+import { useAuth } from "../../../contexts/AuthContext";
+import { useRoom } from "../../../contexts/RoomContext";
 
 export type RoomType = {
     _id: string;
@@ -11,7 +13,7 @@ export type RoomType = {
 
 export const RoomsList = () => {
 
-    const [ allRooms, setAllRooms ] = useState<RoomType[]>([]);
+    const { allRooms, setAllRooms } = useRoom();
 
     useEffect(() => {
 
@@ -24,11 +26,11 @@ export const RoomsList = () => {
               
               var values = JSON.parse(xhttp.responseText);
               setAllRooms(values.rooms);
+              console.log(values.rooms)
               console.log(allRooms);
               // location.href = '/user/home';
             } else if (xhttp.status !== 200) {
             }
-            //console.log(xhttp.responseText);
           }
         };
         //console.log("sending : ", formState);

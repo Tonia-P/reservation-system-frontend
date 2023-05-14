@@ -19,6 +19,7 @@ import RegisterForm from "./pages/register/RegisterPage";
 import { Dashboard } from "./pages/dashboard/Dashboard";
 import Home from "./pages/home/Home";
 import { RoomsPage } from "./pages/dashboard/rooms/RoomsPage";
+import { EventsPage } from "./pages/dashboard/events/EventsPage";
 
 function App() {
   const { authUser, isLogged } = useAuth();
@@ -50,6 +51,7 @@ function App() {
 
             {isLogged && <Route path="/dashboard" element={<Dashboard />} >
               <Route path="rooms" element={<RoomsPage />} />
+              <Route path="events" element={<EventsPage />} />
               </Route>}
           </Routes>
         </Router>

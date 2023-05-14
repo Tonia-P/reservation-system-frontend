@@ -32,7 +32,7 @@ export const EventsList = () => {
     }, [])
     return (
         <div className="flex flex-wrap justify-around">
-            {allEvents && allEvents.map(event => <><EventCard event={event}/></>)}
+            {allEvents.map(event => <EventCard key={event._id} event={event}/>)}
         </div>
     )
 }

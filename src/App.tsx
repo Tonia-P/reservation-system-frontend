@@ -20,6 +20,8 @@ import { Dashboard } from "./pages/dashboard/Dashboard";
 import Home from "./pages/home/Home";
 import { RoomsPage } from "./pages/dashboard/rooms/RoomsPage";
 import { EventsPage } from "./pages/dashboard/events/EventsPage";
+import { EventContextProvider } from "./contexts/EventContext";
+import { EventsDetails } from "./pages/dashboard/events/EventsDetails";
 
 function App() {
   const { authUser, isLogged } = useAuth();
@@ -49,10 +51,14 @@ function App() {
               }
             />
 
-            {isLogged && <Route path="/dashboard" element={<Dashboard />} >
-              <Route path="rooms" element={<RoomsPage />} />
-              <Route path="events" element={<EventsPage />} />
-              </Route>}
+            {isLogged && (
+              <Route path="/dashboard" element={<Dashboard />}>
+                <Route path="rooms" element={<RoomsPage />} />
+                <Route path="room/:id" element={<RoomsPage />} />
+                <Route path="event/:roomId" element={<EventsDetails />} />
+                <Route path="events" element={<EventsPage />} />
+              </Route>
+            )}
           </Routes>
         </Router>
       </div>

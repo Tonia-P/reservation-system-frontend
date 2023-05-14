@@ -26,7 +26,7 @@ export const RoomsList = () => {
               
               var values = JSON.parse(xhttp.responseText);
               setAllRooms(values.rooms);
-              console.log(values.rooms)
+              console.log(values)
               console.log(allRooms);
               // location.href = '/user/home';
             } else if (xhttp.status !== 200) {
@@ -40,7 +40,7 @@ export const RoomsList = () => {
     }, [])
     return (
         <div className="flex flex-wrap justify-around">
-            {allRooms && allRooms.map(room => <><RoomCard room={room}/></>)}
+            {allRooms.map(room => <><RoomCard key={room._id} room={room}/></>)}
         </div>
     )
 }

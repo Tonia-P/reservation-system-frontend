@@ -13,6 +13,9 @@ export const RoomsFilter = () => {
           <option>Seats amount</option>
         </select>
       </div>
+
+
+      
     </div>
   );
 };

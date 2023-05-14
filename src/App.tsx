@@ -19,6 +19,9 @@ import RegisterForm from "./pages/register/RegisterPage";
 import { Dashboard } from "./pages/dashboard/Dashboard";
 import Home from "./pages/home/Home";
 import { RoomsPage } from "./pages/dashboard/rooms/RoomsPage";
+import { EventsPage } from "./pages/dashboard/events/EventsPage";
+import { EventContextProvider } from "./contexts/EventContext";
+import { EventsDetails } from "./pages/dashboard/events/EventsDetails";
 
 function App() {
   const { authUser, isLogged } = useAuth();
@@ -50,6 +53,10 @@ function App() {
 
             {isLogged && <Route path="/dashboard" element={<Dashboard />} >
               <Route path="rooms" element={<RoomsPage />} />
+
+              <Route path="events/" element={<EventsPage />} >
+                <Route path=":_id" element={<RoomsPage />} />
+              </Route>
               </Route>}
           </Routes>
         </Router>

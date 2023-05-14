@@ -10,9 +10,14 @@ interface EventContextData{
 
 export type EventType = {
     _id: string;
-    name: string;
-    seats: number;
-    company: string;
+    endDate: string;
+    startDate: string;
+    state: number;
+    type: string;
+    user: string;
+    seatsLeft: string;
+    room: string;
+    desc: string;
 }
 
 const EventContext = createContext<EventContextData>({

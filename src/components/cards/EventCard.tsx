@@ -2,12 +2,15 @@ import { Link } from "react-router-dom";
 import { EventType } from "../../contexts/EventContext";
 import Button from "../interaction/Button";
 import { FaRegCalendar } from "react-icons/fa"
+import dayjs from "dayjs";
 
 type PropType = {
   event: EventType;
 }
 
-export const EventCard = () => {
+export const EventCard = ({event}: PropType) => {
+
+
   return (
     <Link to="rooms">
     <div className="w-72 border border-0 rounded-xl drop-shadow-xl mr-3 mb-8 bg-primary-content">
@@ -17,15 +20,15 @@ export const EventCard = () => {
       />
 
       <div className="p-4">
-        <p className="text-xl pb-3 font-bold">Kappa</p>
-        <p className="text-sm pb-4 font-semibold">Desc</p>
+        <p className="text-xl pb-3 font-bold">Name</p>
+        <p className="text-sm pb-4 font-semibold">{event.desc}</p>
 
 
         <hr />
 
         <div className="flex flex-row items-baseline" >
         <FaRegCalendar />
-        <div className="py-4 pl-3">Start date</div>
+        <div className="py-4 pl-3">{dayjs(event.startDate).format("YYYY-MM-DD, HH:MM A")}</div>
 
         </div>
 
@@ -33,7 +36,7 @@ export const EventCard = () => {
 
         <div className="flex w-full justify-between items-center pt-4">
           <p className="text-lg">
-            700<span className="text-sm"> seats remaining</span>
+            {event.seatsLeft}<span className="text-sm"> seats remaining</span>
           </p>
         </div>
       </div>

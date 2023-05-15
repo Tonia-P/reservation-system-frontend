@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { RoomType } from "../../pages/dashboard/rooms/RoomsList";
 import Button from "../interaction/Button";
 
@@ -7,6 +8,7 @@ type PropType = {
 
 export const RoomCard = ({room}: PropType) => {
   return (
+    <Link to={`../room/${room._id}`}>
     <div className="w-72 border border-0 rounded-xl drop-shadow-xl mr-3 mb-8 bg-primary-content">
       <img
         className="border border-0 rounded-t-lg"
@@ -32,9 +34,11 @@ export const RoomCard = ({room}: PropType) => {
           <p className="text-3xl">
             {room.seats}<span className="text-sm"> seats</span>
           </p>
-          <Button styles="btn-secondary px-5">Reserve</Button>
         </div>
       </div>
     </div>
+
+
+    </Link>
   );
 };

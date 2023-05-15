@@ -22,6 +22,7 @@ import { RoomsPage } from "./pages/dashboard/rooms/RoomsPage";
 import { EventsPage } from "./pages/dashboard/events/EventsPage";
 import { EventContextProvider } from "./contexts/EventContext";
 import { EventsDetails } from "./pages/dashboard/events/EventsDetails";
+import { RoomDetails } from "./pages/dashboard/rooms/RoomDetails";
 
 function App() {
   const { authUser, isLogged } = useAuth();
@@ -54,7 +55,7 @@ function App() {
             {isLogged && (
               <Route path="/dashboard" element={<Dashboard />}>
                 <Route path="rooms" element={<RoomsPage />} />
-                <Route path="room/:id" element={<RoomsPage />} />
+                <Route path="room/:id" element={<RoomDetails />} />
                 <Route path="event/:roomId" element={<EventsDetails />} />
                 <Route path="events" element={<EventsPage />} />
               </Route>

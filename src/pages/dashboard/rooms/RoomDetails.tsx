@@ -4,6 +4,7 @@ import { RoomType } from "../rooms/RoomsList";
 import Button from "../../../components/interaction/Button";
 import { useRoom } from "../../../contexts/RoomContext";
 import { UserData, useAuth } from "../../../contexts/AuthContext";
+import { TimeSlotWrapper } from "../../../components/timeslots/TimeSlotWrapper";
 
 interface FormState {
   desc: string;
@@ -129,6 +130,7 @@ export const RoomDetails = () => {
           <span className="text-base text-slate-400 pl-6">Kappa Keepo</span>
         </p>
         <p className="pt-6 text-xl"> Date and time</p>
+        <TimeSlotWrapper/>
         <p className="text-xl pt-6">Description of event</p>
         <input
         type="text"

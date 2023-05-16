@@ -62,6 +62,32 @@ export const RoomDetails = () => {
     xhttp.send();
   };
 
+
+  const getReservationDetails = () => {
+    const xhttp = new XMLHttpRequest();
+    const obj = {};
+    xhttp.onreadystatechange = function () {
+      if (xhttp.readyState === 4) {
+        if (xhttp.status === 200) {
+          console.log("Login succesful");
+
+          var values = JSON.parse(xhttp.responseText);
+          setSelectedRoom(values);
+          setFormState((prevState) => ({
+            ...prevState,
+            room: values.newRoom,
+          }));
+          console.log(values);
+          // location.href = '/user/home';
+        } else if (xhttp.status !== 200) {
+        }
+      }
+    };
+    //console.log("sending : ", formState);
+    xhttp.open("Get", "http://localhost:3000/user/reservations/filter/room/" + roomId);
+    xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+    xhttp.send();
+  }
   const reserveRoom = () => {
 
     event.preventDefault();
@@ -93,6 +119,7 @@ export const RoomDetails = () => {
 
   useEffect(() => {
     getRoomDetails();
+    getReservationDetails();
   }, []);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {

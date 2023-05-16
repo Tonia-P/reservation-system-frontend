@@ -1,17 +1,24 @@
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsFillCaretRightFill, BsFillCaretLeftFill } from "react-icons/bs";
 import Button from "../interaction/Button";
 import { TimeSlotTile } from "./TimeSlotTile";
+import { useRoom } from "../../contexts/RoomContext";
+import { TimeSlotTileList } from "./TimeSlotTileList";
 
 export const TimeSlotWrapper = () => {
-  const [time, setTime] = useState(dayjs());
+  const { selectedTime, setSelectedTime } = useRoom();
+
+  useEffect(() => {
+    setSelectedTime(dayjs());
+    if (selectedTime) console.log(selectedTime.format("MMMM D, YYYY"))
+  }, []);
 
   const nextDay = () => {
-    setTime(time.add(1, "day"));
+    setSelectedTime(dayjs(selectedTime).add(1, "day"));
   };
   const prevDay = () => {
-    setTime(time.add(-1, "day"));
+    setSelectedTime(dayjs(selectedTime).add(-1, "day"));
   };
   return (
     <div className="pt-6">
@@ -19,8 +26,8 @@ export const TimeSlotWrapper = () => {
         <Button onClick={prevDay} styles="btn btn-ghost">
           <BsFillCaretLeftFill size={20} />
         </Button>
-        <div className="text-lg">{time.format("DD.MM.YYYY")}</div>
-        <Button onClick={prevDay} styles="btn btn-ghost">
+        <div className="text-lg">{selectedTime && selectedTime.format("MMMM D, YYYY")}</div>
+        <Button onClick={nextDay} styles="btn btn-ghost">
           <BsFillCaretRightFill size={20} />
         </Button>
       </div>
@@ -31,7 +38,7 @@ export const TimeSlotWrapper = () => {
 
 
       <div>
-        <TimeSlotTile selected time="10:00" />
+        <TimeSlotTileList />
       </div>
     </div>
   );

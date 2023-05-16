@@ -55,7 +55,7 @@ function App() {
             {isLogged && (
               <Route path="/dashboard" element={<Dashboard />}>
                 <Route path="rooms" element={<RoomsPage />} />
-                <Route path="room/:id" element={<RoomDetails />} />
+                <Route path="room/:roomId" element={<RoomDetails />} />
                 <Route path="event/:roomId" element={<EventsDetails />} />
                 <Route path="events" element={<EventsPage />} />
               </Route>

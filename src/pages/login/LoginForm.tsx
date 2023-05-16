@@ -41,8 +41,6 @@ const LoginForm = () => {
     }));
   };
 
-
-
   const handleAdminButtonPress = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
@@ -51,10 +49,8 @@ const LoginForm = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    //console.log(formState);
 
     const xhttp = new XMLHttpRequest();
-    const obj = {};
     xhttp.onreadystatechange = function () {
       if (xhttp.readyState === 4) {
         if (xhttp.status === 200) {
@@ -69,16 +65,11 @@ const LoginForm = () => {
             password: values.user.password,
             company: values.user.company
           });
-          console.log(authUser);
-          console.log(isLogged);
           redirect("/dashboard")
-          // location.href = '/user/home';
         } else if (xhttp.status !== 200) {
         }
-        //console.log(xhttp.responseText);
       }
     };
-    //console.log("sending : ", formState);
     xhttp.open("POST", "http://localhost:3000/user/auth/login");
     xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
     xhttp.send(JSON.stringify(formState));

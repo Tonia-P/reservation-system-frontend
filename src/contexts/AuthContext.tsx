@@ -1,6 +1,6 @@
 import { createContext, useMemo, FunctionComponent, ReactNode, useContext, useState  } from 'react';
 
-interface UserData {
+export type UserData = {
     _id: string;
     email: string;
     fname: string;

@@ -39,7 +39,7 @@ export const TimeSlotWrapper = () => {
       </div>
 
       <p className="w-full flex items-center justify-center py-4">
-        Selected time: Not yet selected
+        Selected time: {selectedTime.format("MMMM D, YYYY, HH:MM") + "-" + selectedTime.add(2, "hour").format("HH:MM")}
       </p>
 
       <div>

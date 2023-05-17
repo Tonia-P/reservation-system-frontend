@@ -52,6 +52,7 @@ function App() {
                 <Route path="room/:roomId" element={<RoomDetails />} />
                 <Route path="event/:roomId" element={<EventsDetails />} />
                 <Route path="events" element={<EventsPage />} />
+                <Route path="my-reservations" element={<RoomDetails />} />
               </Route>
             )}
           </Routes>

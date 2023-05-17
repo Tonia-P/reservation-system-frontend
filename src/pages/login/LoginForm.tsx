@@ -6,6 +6,7 @@ import { redirect, Form } from "react-router-dom";
 interface FormState {
   email: string;
   password: string;
+  username: string;
 }
 
 
@@ -13,6 +14,7 @@ const LoginForm = () => {
   const [formState, setFormState] = useState<FormState>({
     email: "",
     password: "",
+    username: ""
   });
 
   const { authUser, setAuthUser, isLogged, setIsLogged } = useAuth();
@@ -38,6 +40,7 @@ const LoginForm = () => {
     setFormState((prevState) => ({
       ...prevState,
       [name]: value,
+      username: name === "email" ? value : prevState.email
     }));
   };
 
@@ -49,6 +52,8 @@ const LoginForm = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    var url = "http://localhost:3000/" + (!adminToggle ? "admin": "user") + "/auth/login"
 
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -70,7 +75,8 @@ const LoginForm = () => {
         }
       }
     };
-    xhttp.open("POST", "http://localhost:3000/user/auth/login");
+    console.log(url)
+    xhttp.open("POST", url);
     xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
     xhttp.send(JSON.stringify(formState));
   };

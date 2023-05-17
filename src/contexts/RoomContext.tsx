@@ -25,7 +25,7 @@ const RoomContext = createContext<RoomContextData>({
         seats: 60,
         company: ""
     },
-    selectedTime: dayjs(),
+    selectedTime: dayjs().minute(0),
     roomReservations: [],
     setRoomReservations: () => {},
     setSelectedTime: () => {},
@@ -48,7 +48,7 @@ const RoomContextProvider: FunctionComponent<Props> = ({children}) =>{
     const [ allRooms, setAllRooms ] = useState<RoomType[]>([]);
     const [ filteredRooms, setFilteredRooms ] = useState<RoomType[]>([]);
     const [ selectedRoom, setSelectedRoom ] = useState<RoomType>()
-    const [ selectedTime, setSelectedTime ] = useState<Dayjs>(dayjs())
+    const [ selectedTime, setSelectedTime ] = useState<Dayjs>(dayjs().minute(0))
     const [ roomReservations, setRoomReservations ] = useState<EventType[]>([]);
 
     return (

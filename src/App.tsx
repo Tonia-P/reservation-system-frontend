@@ -15,6 +15,7 @@ import { EventsDetails } from "./pages/dashboard/events/EventsDetails";
 import { RoomDetails } from "./pages/dashboard/rooms/RoomDetails";
 import { useAuth } from "./contexts/AuthContext";
 import { RoomContextProvider } from "./contexts/RoomContext";
+import { MyReservationCard } from "./components/cards/MyReservationCard";
 
 function App() {
   const { authUser, isLogged } = useAuth();
@@ -52,7 +53,7 @@ function App() {
                 <Route path="room/:roomId" element={<RoomDetails />} />
                 <Route path="event/:roomId" element={<EventsDetails />} />
                 <Route path="events" element={<EventsPage />} />
-                <Route path="my-reservations" element={<RoomDetails />} />
+                <Route path="my-reservations" element={<MyReservationCard />} />
               </Route>
             )}
           </Routes>

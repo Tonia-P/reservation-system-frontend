@@ -10,6 +10,8 @@ export type UserData = {
 }
 interface AuthContextData {
     authUser: UserData | null;
+    isAdmin: boolean;
+    setIsAdmin: (isAdmin: boolean) => void;
     setAuthUser: (authUser: UserData | null) => void;
     isLogged: boolean;
     setIsLogged: (isLogged: boolean) => void;
@@ -18,6 +20,8 @@ interface AuthContextData {
 const AuthContext = createContext<AuthContextData>({
     authUser: null,
     isLogged: false,
+    isAdmin: false,
+    setIsAdmin: () => {},
     setAuthUser: () => {},
     setIsLogged: () => {},});
 
@@ -33,11 +37,12 @@ const AuthContextProvider: FunctionComponent<Props> = ({children}) => {
 
     const [authUser, setAuthUser] = useState<UserData | null>(null);
     const [isLogged, setIsLogged] = useState<boolean>(false);
+    const [isAdmin, setIsAdmin] = useState<boolean>(false)
 
 
 
     return (
-        <AuthContext.Provider value= {{authUser, setAuthUser, isLogged, setIsLogged}}>
+        <AuthContext.Provider value= {{authUser, setAuthUser, isLogged, setIsLogged, isAdmin, setIsAdmin}}>
             {children}
         </AuthContext.Provider>
     );

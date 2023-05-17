@@ -96,15 +96,15 @@ export const RoomDetails = () => {
             ...prevState,
             room: values.newRoom,
           }));
-          //console.log(values);
+          console.log(values);
           // location.href = '/user/home';
         } else if (xhttp.status !== 200) {
         }
       }
     };
-    xhttp.open("Get", "http://localhost:3000/user/reservations/filter/room/:room");
+    xhttp.open("Get", "http://localhost:3000/user/reservations/filter/room/" +roomId);
     xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
-    xhttp.send(JSON.stringify({room: {...formState.room}}));
+    xhttp.send();
   };
   //   const reserveRoom = () => {
 

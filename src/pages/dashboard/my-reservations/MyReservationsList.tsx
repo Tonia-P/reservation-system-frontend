@@ -32,7 +32,7 @@ export const MyReservationsList = () => {
         };
         xhttp.open("Get", "http://localhost:3000/user/reservations/rooms/own");
         xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
-        xhttp.send(JSON.stringify(authUser));
+        xhttp.send();
     }, []);
 
 

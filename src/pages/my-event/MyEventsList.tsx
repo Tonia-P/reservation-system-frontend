@@ -81,7 +81,7 @@ export const MyEventsList = () => {
       <div className="modal">
         <div className="modal-box relative">
           <label
-            htmlFor="my-modal-3"
+            htmlFor="my-modal-4"
             className="btn btn-sm btn-circle absolute right-2 top-2"
           >
             ✕

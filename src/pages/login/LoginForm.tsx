@@ -6,6 +6,7 @@ import { redirect, Form } from "react-router-dom";
 interface FormState {
   email: string;
   password: string;
+  username: string;
 }
 
 
@@ -13,6 +14,7 @@ const LoginForm = () => {
   const [formState, setFormState] = useState<FormState>({
     email: "",
     password: "",
+    username: ""
   });
 
   const { authUser, setAuthUser, isLogged, setIsLogged } = useAuth();
@@ -38,10 +40,9 @@ const LoginForm = () => {
     setFormState((prevState) => ({
       ...prevState,
       [name]: value,
+      username: name === "email" ? value : prevState.email
     }));
   };
-
-
 
   const handleAdminButtonPress = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -51,10 +52,10 @@ const LoginForm = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    //console.log(formState);
+
+    var url = "http://localhost:3000/" + (!adminToggle ? "admin": "user") + "/auth/login"
 
     const xhttp = new XMLHttpRequest();
-    const obj = {};
     xhttp.onreadystatechange = function () {
       if (xhttp.readyState === 4) {
         if (xhttp.status === 200) {
@@ -69,17 +70,13 @@ const LoginForm = () => {
             password: values.user.password,
             company: values.user.company
           });
-          console.log(authUser);
-          console.log(isLogged);
           redirect("/dashboard")
-          // location.href = '/user/home';
         } else if (xhttp.status !== 200) {
         }
-        //console.log(xhttp.responseText);
       }
     };
-    //console.log("sending : ", formState);
-    xhttp.open("POST", "http://localhost:3000/user/auth/login");
+    console.log(url)
+    xhttp.open("POST", url);
     xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
     xhttp.send(JSON.stringify(formState));
   };

@@ -1,14 +1,20 @@
 import { Link } from "react-router-dom";
-import { RoomType } from "../../pages/dashboard/rooms/RoomsList";
+import { EventType } from "../../contexts/EventContext";
 import Button from "../interaction/Button";
+import { FaRegCalendar } from "react-icons/fa"
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
 
 type PropType = {
-  room: RoomType;
+  event: EventType;
 }
 
-export const RoomCard = ({room}: PropType) => {
+export const EventCard = ({event}: PropType) => {
+  
+
   return (
-    <Link to={`../room/${room._id}`}>
+    <Link to={`../event/${event._id}`}>
     <div className="w-72 border border-0 rounded-xl drop-shadow-xl mr-3 mb-8 bg-primary-content">
       <img
         className="border border-0 rounded-t-lg"
@@ -16,29 +22,28 @@ export const RoomCard = ({room}: PropType) => {
       />
 
       <div className="p-4">
-        <p className="text-xl font-bold">{room.name}</p>
-        <p className="text-sm font-semibold text-slate-400">Subtitle</p>
+        <p className="text-xl pb-3 font-bold">Name</p>
+        <p className="text-sm pb-4 font-semibold">{event.desc}</p>
 
-        <div className="py-4">
-          <p className="text-xs text-slate-400 pb-2">Features</p>
-          <div className="w-full flex flex-wrap">
-            <div className="badge badge-primary p-3 badge-outline mr-1 mb-2">Testfhghfhfhfghfhfyyy</div>
-            <div className="badge badge-secondary p-3 badge-outline mr-1">Testyyy</div>
-            <div className="badge badge-accent p-3 badge-outline mr-1">Testyyy</div>
-          </div>
+
+        <hr />
+
+        <div className="flex flex-row items-baseline" >
+        <FaRegCalendar />
+        <div className="py-4 pl-3">{dayjs(event.startDate).fromNow()}</div>
+
         </div>
 
         <hr />
 
         <div className="flex w-full justify-between items-center pt-4">
-          <p className="text-3xl">
-            {room.seats}<span className="text-sm"> seats</span>
+          <p className="text-lg">
+            {event.seatsLeft}<span className="text-sm"> seats remaining</span>
           </p>
         </div>
       </div>
     </div>
-
-
+    
     </Link>
   );
 };

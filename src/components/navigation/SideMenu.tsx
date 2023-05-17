@@ -14,8 +14,8 @@ export const SideMenu = () => {
 
         <hr />
 
-        <SideBarLink path="my reservations" label="My Reservations" />
-        <SideBarLink path="my events" label="My Events" />
+        <SideBarLink path="my-reservations" label="My Reservations" />
+        <SideBarLink path="my-events" label="My Events" />
         <Button styles="btn-ghost">Settings</Button>
         <Button styles="btn-ghost btn-disabled bg-transparent">Go Pro</Button>
 

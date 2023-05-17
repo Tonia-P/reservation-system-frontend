@@ -1,19 +1,11 @@
 import { useEffect, useState } from "react";
-import { RoomCard } from "../../../components/cards/RoomCard";
+import { EventCard } from "../../../components/cards/EventCard";
 import { useAuth } from "../../../contexts/AuthContext";
-import { useRoom } from "../../../contexts/RoomContext";
+import { useEvent } from "../../../contexts/EventContext";
 
-export type RoomType = {
-    _id: string;
-    name: string;
-    seats: number;
-    company: string;
-}
+export const EventsList = () => {
 
-
-export const RoomsList = () => {
-
-    const { allRooms, setAllRooms } = useRoom();
+    const { allEvents, setAllEvents } = useEvent();
 
     useEffect(() => {
 
@@ -25,22 +17,22 @@ export const RoomsList = () => {
               console.log("Login succesful");
               
               var values = JSON.parse(xhttp.responseText);
-              setAllRooms(values.rooms);
-              console.log(values)
-              console.log(allRooms);
+              setAllEvents(values);
+              // console.log(values)
+              // console.log(allEvents);
               // location.href = '/user/home';
             } else if (xhttp.status !== 200) {
             }
           }
         };
         //console.log("sending : ", formState);
-        xhttp.open("Get", "http://localhost:3000/user/rooms");
+        xhttp.open("Get", "http://localhost:3000/user/reservations/verified");
         xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
         xhttp.send();
     }, [])
     return (
         <div className="flex flex-wrap justify-around">
-            {allRooms.map(room => <><RoomCard key={room._id} room={room}/></>)}
+            {allEvents.map(event => <EventCard key={event._id} event={event}/>)}
         </div>
     )
 }

@@ -14,11 +14,11 @@ export const EventsDetails = () => {
     xhttp.onreadystatechange = function () {
       if (xhttp.readyState === 4) {
         if (xhttp.status === 200) {
-          console.log("Login succesful");
+          //console.log("Login succesful");
 
           var values = JSON.parse(xhttp.responseText);
           setRoom(values);
-          console.log(values);
+          //console.log(values);
           // location.href = '/user/home';
         } else if (xhttp.status !== 200) {
         }

@@ -74,11 +74,11 @@ export const RoomDetails = () => {
   };
 
   useEffect(() => {
-    console.log(selectedRoom);
+    //console.log(selectedRoom);
   }, [selectedRoom]);
   
   useEffect(() => {
-    console.log(formState);
+    //console.log(formState);
     setSelectedRoom({...formState.room})
   }, [formState.room]);
 
@@ -88,7 +88,7 @@ export const RoomDetails = () => {
     xhttp.onreadystatechange = function () {
       if (xhttp.readyState === 4) {
         if (xhttp.status === 200) {
-          console.log("Login succesful");
+          //console.log("Login succesful");
 
           var values = JSON.parse(xhttp.responseText);
           setSelectedRoom(values);
@@ -96,7 +96,7 @@ export const RoomDetails = () => {
             ...prevState,
             room: values.newRoom,
           }));
-          console.log(values);
+          //console.log(values);
           // location.href = '/user/home';
         } else if (xhttp.status !== 200) {
         }

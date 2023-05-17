@@ -18,8 +18,8 @@ export const EventsList = () => {
               
               var values = JSON.parse(xhttp.responseText);
               setAllEvents(values);
-              console.log(values)
-              console.log(allEvents);
+              // console.log(values)
+              // console.log(allEvents);
               // location.href = '/user/home';
             } else if (xhttp.status !== 200) {
             }

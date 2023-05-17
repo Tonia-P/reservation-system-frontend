@@ -3,7 +3,7 @@ import Button from "../interaction/Button"
 import { EventType } from "../../contexts/EventContext"
 import dayjs from "dayjs"
 
-export const MyReservationCard = () => {
+export const MyReservationCard = (event:any) => {
     return(
         <div className="w-full flex flex-row border border-0 rounded-xl drop-shadow-xl mr-3 mb-8 bg-primary-content">
       <img
@@ -14,10 +14,10 @@ export const MyReservationCard = () => {
       <div className="p-4 flex flex-row w-full items-center justify-between">
 
         <div>
-        <p className="text-xl  font-bold">Name</p>
+        <p className="text-xl  font-bold">{event.name}</p>
         <div className="flex flex-row items-baseline" >
         <FaRegCalendar />
-        <div className="py-4 pl-3">Kappa</div>
+        <div className="py-4 pl-3">{event.startDate}</div>
 
         </div>
 
@@ -25,12 +25,9 @@ export const MyReservationCard = () => {
 
         <div>
 
-        <Button styles="btn btn-error mr-2">
+        <label htmlFor="my-modal-3" className="btn btn-error mr-2">
             Cancel
-        </Button>
-        <Button styles="btn btn-success">
-            Update
-        </Button>
+        </label>
         </div>
       </div>
     </div>

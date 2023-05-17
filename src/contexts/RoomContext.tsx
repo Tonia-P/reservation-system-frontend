@@ -6,20 +6,25 @@ import { EventType } from "./EventContext";
 interface RoomContextData{
     allRooms: RoomType[];
     filteredRooms: RoomType[];
-    selectedRoom: RoomType | undefined;
+    selectedRoom: RoomType;
     selectedTime: Dayjs;
     roomReservations: EventType[];
-    setRoomReservations: (event: EventType[]) => void;
-    setSelectedTime: (time: Dayjs) => void,
-    setAllRooms:(rooms: RoomType[]) => void,
-    setFilteredRooms:(rooms: RoomType[]) => void
-    setSelectedRoom: (rooms: RoomType) => void,
+    setRoomReservations: (roomReservations: EventType[]) => void;
+    setSelectedTime: (selectedTime: Dayjs) => void,
+    setAllRooms:(allRooms: RoomType[]) => void,
+    setFilteredRooms:(filteredRooms: RoomType[]) => void
+    setSelectedRoom: (selectedRoom: RoomType) => void,
 }
 
 const RoomContext = createContext<RoomContextData>({
     allRooms: [],
     filteredRooms: [],
-    selectedRoom: undefined,
+    selectedRoom: {
+        _id: "",
+        name: "",
+        seats: 60,
+        company: ""
+    },
     selectedTime: dayjs(),
     roomReservations: [],
     setRoomReservations: () => {},

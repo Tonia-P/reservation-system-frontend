@@ -1,28 +1,20 @@
 import "./App.css";
 import {
   Navigate,
-  Outlet,
   Route,
   BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
 import TopNavbar from "./components/navigation/TopNavbar";
-import { AuthContextProvider, useAuth } from "./contexts/AuthContext";
-import { ChangeEvent } from "react";
-import {
-  createBrowserRouter,
-  redirect,
-  RouterProvider,
-} from "react-router-dom";
 import LoginForm from "./pages/login/LoginForm";
 import RegisterForm from "./pages/register/RegisterPage";
 import { Dashboard } from "./pages/dashboard/Dashboard";
-import Home from "./pages/home/Home";
 import { RoomsPage } from "./pages/dashboard/rooms/RoomsPage";
 import { EventsPage } from "./pages/dashboard/events/EventsPage";
-import { EventContextProvider } from "./contexts/EventContext";
 import { EventsDetails } from "./pages/dashboard/events/EventsDetails";
 import { RoomDetails } from "./pages/dashboard/rooms/RoomDetails";
+import { useAuth } from "./contexts/AuthContext";
+import { RoomContextProvider } from "./contexts/RoomContext";
 
 function App() {
   const { authUser, isLogged } = useAuth();
@@ -30,6 +22,8 @@ function App() {
   return (
     <>
       <div className="App">
+
+      <RoomContextProvider>
         <Router>
           <TopNavbar />
 
@@ -40,17 +34,17 @@ function App() {
               element={
                 isLogged ? <Navigate to="/dashboard" replace /> : <LoginForm />
               }
-            />
+              />
             <Route
               path="/register"
               element={
                 isLogged ? (
                   <Navigate to="/dashboard" replace />
-                ) : (
-                  <RegisterForm />
-                )
+                  ) : (
+                    <RegisterForm />
+                    )
               }
-            />
+              />
 
             {isLogged && (
               <Route path="/dashboard" element={<Dashboard />}>
@@ -62,6 +56,7 @@ function App() {
             )}
           </Routes>
         </Router>
+            </RoomContextProvider>
       </div>
     </>
   );

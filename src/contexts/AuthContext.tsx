@@ -15,7 +15,8 @@ interface AuthContextData {
     setIsLogged: (isLogged: boolean) => void;
 }
 
-const AuthContext = createContext<AuthContextData>({authUser: null,
+const AuthContext = createContext<AuthContextData>({
+    authUser: null,
     isLogged: false,
     setAuthUser: () => {},
     setIsLogged: () => {},});

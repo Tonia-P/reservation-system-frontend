@@ -9,7 +9,7 @@ import { TimeSlotWrapper } from "../../../components/timeslots/TimeSlotWrapper";
 interface FormState {
   desc: string;
   type: string;
-  room: RoomType | undefined;
+  room: RoomType;
   startDate: string;
   endDate: string;
   user: UserData | null;
@@ -22,10 +22,15 @@ export const RoomDetails = () => {
   const [formState, setFormState] = useState<FormState>({
     desc: "",
     type: "",
-    room: undefined,
+    room: {
+        _id: "",
+        company: "",
+        seats: 0,
+        name: ""
+    },
     startDate: "",
     endDate: "",
-    user: authUser
+    user: authUser,
   });
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -42,15 +47,21 @@ export const RoomDetails = () => {
     xhttp.onreadystatechange = function () {
       if (xhttp.readyState === 4) {
         if (xhttp.status === 200) {
-          console.log("Login succesful");
-
           var values = JSON.parse(xhttp.responseText);
-          setSelectedRoom(values);
+          var ress:RoomType = values.newRoom
+          
+          
+
           setFormState((prevState) => ({
             ...prevState,
-            room: values.newRoom,
+            room: {
+              ...values.newRoom,
+            },
           }));
-          console.log(values);
+
+          
+
+          getReservationDetails();
           // location.href = '/user/home';
         } else if (xhttp.status !== 200) {
         }
@@ -62,6 +73,14 @@ export const RoomDetails = () => {
     xhttp.send();
   };
 
+  useEffect(() => {
+    console.log(selectedRoom);
+  }, [selectedRoom]);
+  
+  useEffect(() => {
+    console.log(formState);
+    setSelectedRoom({...formState.room})
+  }, [formState.room]);
 
   const getReservationDetails = () => {
     const xhttp = new XMLHttpRequest();
@@ -83,49 +102,47 @@ export const RoomDetails = () => {
         }
       }
     };
-    //console.log("sending : ", formState);
-    xhttp.open("Get", "http://localhost:3000/user/reservations/filter/room/" + roomId);
+    xhttp.open("Get", "http://localhost:3000/user/reservations/filter/room/:room");
     xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
-    xhttp.send();
-  }
-  const reserveRoom = () => {
+    xhttp.send(JSON.stringify({room: {...formState.room}}));
+  };
+  //   const reserveRoom = () => {
 
-    event.preventDefault();
+  //     event.preventDefault();
 
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-      if (xhttp.readyState === 4) {
-        if (xhttp.status === 200) {
-          console.log("Login succesful");
-          setIsLogged(true);
-          var values = JSON.parse(xhttp.responseText);
-          setAuthUser({
-            _id: values.user._id,
-            email: values.user.email,
-            fname: values.user.fname,
-            lname: values.user.lname,
-            password: values.user.password,
-            company: values.user.company,
-          });
-          redirect("/dashboard");
-        } else if (xhttp.status !== 200) {
-        }
-      }
-    };
-    xhttp.open("POST", "http://localhost:3000/user/auth/login");
-    xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
-    xhttp.send(JSON.stringify(formState));
-  }
+  //     const xhttp = new XMLHttpRequest();
+  //     xhttp.onreadystatechange = function () {
+  //       if (xhttp.readyState === 4) {
+  //         if (xhttp.status === 200) {
+  //           console.log("Login succesful");
+  //           setIsLogged(true);
+  //           var values = JSON.parse(xhttp.responseText);
+  //           setAuthUser({
+  //             _id: values.user._id,
+  //             email: values.user.email,
+  //             fname: values.user.fname,
+  //             lname: values.user.lname,
+  //             password: values.user.password,
+  //             company: values.user.company,
+  //           });
+  //           redirect("/dashboard");
+  //         } else if (xhttp.status !== 200) {
+  //         }
+  //       }
+  //     };
+  //     xhttp.open("POST", "http://localhost:3000/user/auth/login");
+  //     xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+  //     xhttp.send(JSON.stringify(formState));
+  //   }
 
   useEffect(() => {
     getRoomDetails();
-    getReservationDetails();
   }, []);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
-    console.log(formState)
+
+    console.log(formState);
   };
 
   return (
@@ -157,11 +174,11 @@ export const RoomDetails = () => {
           <span className="text-base text-slate-400 pl-6">Kappa Keepo</span>
         </p>
         <p className="pt-6 text-xl"> Date and time</p>
-        <TimeSlotWrapper/>
+        <TimeSlotWrapper />
         <p className="text-xl pt-6">Description of event</p>
         <input
-        type="text"
-        name="desc"
+          type="text"
+          name="desc"
           value={formState.desc}
           onChange={handleInputChange}
           className="textarea textarea-bordered w-full mt-6"
@@ -170,13 +187,11 @@ export const RoomDetails = () => {
 
         <p className="text-xl pt-6">Type of event</p>
         <select className="select mt-6 select-bordered w-full">
-          <option selected>
-            Event
-          </option>
+          <option selected>Event</option>
         </select>
 
         <Button styles="btn btn-primary px-6 mt-10">
-            <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" />
         </Button>
       </form>
 

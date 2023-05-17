@@ -14,8 +14,8 @@ export const TimeSlotTileList = () => {
 
     const createTimeslots = () => {
         var minAvailTime = minAvailTimeTime.hour(8).minute(0);
-        console.log('In create timeslots - all rends: ')
-        console.log(selectedTime.format("HH:MM"))
+        // console.log('In create timeslots - all rends: ')
+        // console.log(selectedTime.format("HH:MM"))
         
         var i = 0;
         var counter = 0;
@@ -47,21 +47,21 @@ export const TimeSlotTileList = () => {
 
         }
 
-        console.log(availableTimes);
+        // console.log(availableTimes);
 
         return availableTimes;
 
     }
 
     useEffect(() => {
-        console.log("Recreate timeslots.")
-        console.log(roomReservations);
+        // console.log("Recreate timeslots.")
+        // console.log(roomReservations);
         setAvailableTimes(createTimeslots());
     }, [roomReservations]);
     
     return(
         <div>
-            {availableTimes && availableTimes.map(slot => availableTimes.indexOf(slot) !=0 && <TimeSlotTile key={slot.reservation?._id} time={slot.time} disabled={slot.reservation != null} />)}
+            {availableTimes && availableTimes.map(slot => availableTimes.indexOf(slot) !=0 && <TimeSlotTile key={slot.time.format('HH:mm')} time={slot.time} disabled={slot.reservation != null} />)}
         </div>
     )
 }
